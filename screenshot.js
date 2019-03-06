@@ -16,7 +16,9 @@ async function takeScreenshot(url, browserOptions = {}, pageOptions = {}) {
 
   await sleep(3000);
 
-  console.log(await page.content());
+  page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+
+  await page.evaluate(() => console.log(`url is ${location.href}`));
 
   let img = await page.screenshot({
     encoding: 'base64'
