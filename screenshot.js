@@ -21,6 +21,8 @@ async function takeScreenshot(url, browserOptions = {}, pageOptions = {}) {
   });
 
   return img;
+
+  await browser.close();
 };
 
 module.exports = takeScreenshot;
