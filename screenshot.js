@@ -14,8 +14,6 @@ async function takeScreenshot(url, browserOptions = {}, pageOptions = {}) {
 
   await page.goto(url, {waitUntil: 'networkidle2'});
 
-  await sleep(10000);
-
   page.on('console', msg => console.log('PAGE LOG:', msg.text()));
 
   await page.evaluate(() => console.log(`url is ${location.href}`));
