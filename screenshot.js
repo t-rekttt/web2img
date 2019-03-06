@@ -16,6 +16,8 @@ async function takeScreenshot(url, browserOptions = {}, pageOptions = {}) {
 
   await sleep(3000);
 
+  console.log(await page.content());
+
   let img = await page.screenshot({
     encoding: 'base64'
   });
