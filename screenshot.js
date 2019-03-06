@@ -10,21 +10,26 @@ async function takeScreenshot(url, browserOptions = {}, pageOptions = {}) {
     ...browserOptions
   });
 
-  let page = await browser.newPage();
+  try {
+    let page = await browser.newPage();
 
-  await page.goto(url, {waitUntil: 'networkidle2'});
+    await page.goto(url, {waitUntil: 'networkidle2'});
 
-  page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+    page.on('console', msg => console.log('PAGE LOG:', msg.text()));
 
-  await page.evaluate(() => console.log(`url is ${location.href}`));
+    await page.evaluate(() => console.log(`url is ${location.href}`));
 
-  let img = await page.screenshot({
-    encoding: 'base64'
-  });
+    let img = await page.screenshot({
+      encoding: 'base64'
+    });
 
-  return img;
+    return img;
 
-  await browser.close();
+    await browser.close();
+  } catch (err) {
+    await browser.close();
+    return {};
+  }
 };
 
 module.exports = takeScreenshot;
