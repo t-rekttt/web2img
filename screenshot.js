@@ -23,9 +23,9 @@ async function takeScreenshot(url, browserOptions = {}, pageOptions = {}) {
       encoding: 'base64'
     });
 
-    return img;
-
     await browser.close();
+
+    return img;
   } catch (err) {
     await browser.close();
     return {};
